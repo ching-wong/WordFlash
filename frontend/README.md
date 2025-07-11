@@ -68,13 +68,11 @@ Here is a breakdown of the word list by word length:
 
 Scoring is based on word length, with longer words worth more points to reflect their increased difficulty.
 
-The maximum score for a word of length \( n \) is calculated using this formula:
+The maximum score for a word of length n is calculated using this formula:
 
-\[
-\text{max score} = \left\lfloor 1200 \times 1.3^{n} \right\rfloor
-\]
+max_score = round(1200 × 1.3^n)
 
-where \( n \) is the word length (from 5 to 12).
+where n is the word length.
 
 *Note: The constants 1200 and 1.3 are arbitrary values. I might adjust these constants later to balance the scoring system based on gameplay experience.*
 
@@ -91,9 +89,7 @@ where \( n \) is the word length (from 5 to 12).
 
 Your actual score for each word is calculated by subtracting the total time taken (in milliseconds) from its maximum score, then multiplying by a penalty multiplier based on the number of attempts:
 
-\[
-\text{score} = \max\big((\text{max score} - \text{time taken (ms)}) \times (1 - 0.05 \times \min(\text{attempts} - 1, 4)),\, 100\big)
-\]
+score = max((max_score - total_time_taken) * (1 - 0.05 * min(num_attempts - 1, 4)), 100)
 
 A minimum score of 100 ensures you always get some points, even with slow or repeated attempts.
 
