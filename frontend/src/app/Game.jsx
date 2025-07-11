@@ -56,7 +56,7 @@ export default function Game() {
     <div className="flex flex-col items-center justify-center h-screen space-y-6">
       <div className="w-full max-w-md px-4 mx-auto">
         {/* info on the top */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-8">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-4 px-4 max-w-full">
           <LevelDisplay lv={lv} />
           <QuestionNumberDisplay total={words.length} current={wordIndex + 1} />
           <ScoreDisplay score={score} />

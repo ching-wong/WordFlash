@@ -25,7 +25,7 @@ export default function AnswerForm({ onSubmit }) {
 
   return (
     <div className="flex justify-center mt-10">
-      <form onSubmit={submit} className="flex items-center space-x-4">
+      <form onSubmit={submit} className="flex items-center gap-2 w-full max-w-md px-2">
         <input
           value={answer}
           onChange={handleChange}
@@ -34,13 +34,13 @@ export default function AnswerForm({ onSubmit }) {
           spellCheck={false}
           autoCorrect="off"
           autoCapitalize="off"
-          className="border border-gray-400 rounded px-4 py-2 w-96 text-4xl text-center"
+          className="flex-1 border border-gray-400 rounded px-3 py-2 text-2xl text-center"
           maxLength={20}
           type="text"
         />
         <button
           type="submit"
-          className="text-5xl px-1 text-blue-600 hover:text-blue-800 transition"
+          className="text-3xl px-2 text-blue-600 hover:text-blue-800 transition"
           aria-label="Submit"
         >
           ⏎
