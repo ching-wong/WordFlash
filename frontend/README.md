@@ -1,6 +1,22 @@
 # WordFlash
 
-**WordFlash** is a small personal project I am building to train my short-term memory for words and to grow as a software engineer. It is part brain training, part coding journey.
+**WordFlash** is a small personal project I am building to train my short-term memory for words and to grow as a software engineer.
+
+## Live Demo
+
+Try the app live here: [https://word-flash-dun.vercel.app](https://word-flash-dun.vercel.app)
+
+
+## Getting Started
+
+This project uses [Vite](https://vitejs.dev) with React.
+
+To run locally:
+
+```bash
+npm install
+npm run dev
+```
 
 ## Why I am building this
 
