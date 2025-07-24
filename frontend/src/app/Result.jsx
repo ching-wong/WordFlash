@@ -1,7 +1,10 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { unlockScore } from '../constants/gameLevels'
+import { useEffect } from 'react';
 
-export default function Result2() {
+import { unlockScore } from '../constants/gameLevels'
+import { getProgress, setProgress } from '../utils/storage';
+
+export default function Result() {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -9,6 +12,19 @@ export default function Result2() {
   
   const minScore = unlockScore[lv];
   const isNextLevel = minScore <= score && lv < 10;
+
+  useEffect(() => {
+    if (isNextLevel) {
+      const progress = getProgress();
+      if (lv + 1 > progress.unlockedLevel) {
+        setProgress({ 
+          ...progress, 
+          unlockedLevel: lv + 1 
+        });
+      }
+    }
+  }, [isNextLevel, lv]);
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-6">

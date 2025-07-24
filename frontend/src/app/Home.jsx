@@ -1,6 +1,17 @@
-import LevelButton from '../components/LevelButton';
+import { useState, useEffect } from "react";
+
+import LevelButton from "../components/LevelButton";
+import { getProgress, setProgress } from "../utils/storage";
+
 
 export default function Home() {
+  const [unlockedLevel, setUnlockedLevel] = useState(1);
+
+  useEffect(() => {
+    const { unlockedLevel } = getProgress();
+    setUnlockedLevel(unlockedLevel);
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-6">
       {/* Title */}
@@ -8,39 +19,47 @@ export default function Home() {
 
       {/* First row: levels 1 to 3 */}
       <div className="flex gap-4">
-        <LevelButton lv={1} />
-        <LevelButton lv={2} />
-        <LevelButton lv={3} />
+        <LevelButton lv={1} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={2} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={3} unlockedLevel={unlockedLevel} />
       </div>
 
       {/* Second row: levels 4 to 6 */}
       <div className="flex gap-4">
-        <LevelButton lv={4} />
-        <LevelButton lv={5} />
-        <LevelButton lv={6} />
+        <LevelButton lv={4} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={5} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={6} unlockedLevel={unlockedLevel} />
       </div>
 
       {/* Third row: levels 7 to 9 */}
       <div className="flex gap-4">
-        <LevelButton lv={7} />
-        <LevelButton lv={8} />
-        <LevelButton lv={9} />
+        <LevelButton lv={7} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={8} unlockedLevel={unlockedLevel} />
+        <LevelButton lv={9} unlockedLevel={unlockedLevel} />
       </div>
 
+      {/* Fourth row: level 10, and reset button */}
       <div className="flex gap-4">
-        <LevelButton lv={10} />
+        <LevelButton lv={10} unlockedLevel={unlockedLevel} />
+        <button
+          onClick={() => {
+            setProgress({ unlockedLevel: 1, highestScores: [] });
+            setUnlockedLevel(1); // update local state too
+          }}
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+        >
+          Reset Progress
+        </button>
       </div>
 
       {/* Instructions */}
       <section className="text-left bg-gray-50 p-6 rounded-lg shadow-md w-full">
         <h2 className="text-2xl font-semibold mb-3">Game Instructions</h2>
-        <p className="mt-4 font-medium text-gray-800">Choose Level 1 to start.</p>
         <ul className="list-disc list-inside space-y-2 text-gray-700">
           <li>
             For each word:
             <ul className="list-decimal list-inside ml-5 mt-1 space-y-1">
-              <li>The word is displayed on screen.</li>
-              <li>A timer starts automatically.</li>
+              <li>A word is displayed on screen, when a timer starts automatically.</li>
               <li>You can press any key on your keyboard or click/tap the screen to hide the word and stop the timer.</li>
               <li>After a brief delay, an input field appears.</li>
               <li>You enter the word you just saw.</li>
