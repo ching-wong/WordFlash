@@ -124,7 +124,7 @@ Start at Level 1. To unlock the next level, you must score at least 90% of the m
 ## Roadmap
 
 - [x] React frontend MVP
-- [ ] Store progress locally (Level unlock system)
+- [x] Store progress locally (Level unlock system)
 - [ ] Add FastAPI backend with word data
 - [ ] Add authentication
 - [ ] Store progress in database

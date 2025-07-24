@@ -69,6 +69,13 @@ export default function Home() {
           <li>If it is incorrect, you can try again until you get it right.</li>
         </ul>
       </section>
+
+      <h1>
+        To see the code, visit{" "}
+        <a href="https://github.com/ching-wong/WordFlash" target="_blank" rel="noopener noreferrer">
+          https://github.com/ching-wong/WordFlash
+        </a>.
+      </h1>
     </div>
   );
 }
