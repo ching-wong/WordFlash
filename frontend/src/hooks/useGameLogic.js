@@ -1,5 +1,6 @@
 import useCountdownLogic from './useCountdownLogic';
 import calculateScore from './useScoreLogic'; // or from a `utils` folder if it's not a hook
+import { getProgress, setProgress } from '../utils/storage';
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
@@ -107,6 +108,17 @@ export default function useGameLogic(lv, words, pauseDurationBeforeWord, pauseDu
   // when wordIndex changes, check whether the game is done
   useEffect(() => {
     if (wordIndex === words.length) {
+      // save score to local storage
+      const progress = getProgress();
+
+      const updatedScores = [...progress.highestScores, score]
+        .sort((a, b) => b - a);
+
+      setProgress({
+        ...progress,
+        highestScores: updatedScores,
+      });
+
       navigate('/result', { state: { lv, score } });
     }
   }, [wordIndex]);

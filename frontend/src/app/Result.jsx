@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { unlockScore } from '../constants/gameLevels'
 import { getProgress, setProgress } from '../utils/storage';
@@ -13,7 +13,12 @@ export default function Result() {
   const minScore = unlockScore[lv];
   const isNextLevel = minScore <= score && lv < 10;
 
+  const [highestScores, setHighestScores] = useState([]);
+
   useEffect(() => {
+    const progress = getProgress();
+    setHighestScores(progress.highestScores || []);
+
     if (isNextLevel) {
       const progress = getProgress();
       if (lv + 1 > progress.unlockedLevel) {
@@ -41,26 +46,48 @@ export default function Result() {
         Passing Score: {minScore}
       </h2>
 
-      {isNextLevel && <button
-        onClick={() => navigate('/game', { state: { lv : lv + 1 } })}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        Next level
-      </button>}
-      
-      <button
-        onClick={() => navigate('/game', { state: { lv } })}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        Try again
-      </button>
+      <div className="flex flex-row items-center justify-center gap-4 flex-wrap">
 
-      <button
-        onClick={() => navigate('/')}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        Home
-      </button>
+        {isNextLevel && <button
+          onClick={() => navigate('/game', { state: { lv : lv + 1 } })}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Next level
+        </button>}
+        
+        <button
+          onClick={() => navigate('/game', { state: { lv } })}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Try again
+        </button>
+
+        <button
+          onClick={() => navigate('/')}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Home
+        </button>
+      </div>
+
+
+      {/* History */}
+      <div className="mt-8 bg-gray-100 p-4 rounded shadow w-72">
+        <h3 className="text-xl font-semibold mb-2 text-center text-gray-700">History</h3>
+        <ul className="list-decimal list-inside text-gray-800 space-y-1">
+          {highestScores.length === 0 && (
+            <li className="text-gray-500">No scores yet.</li>
+          )}
+          {highestScores.map((s, idx) => (
+            <li
+              key={idx}
+              className={s === score ? 'font-bold text-blue-600' : ''}
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
