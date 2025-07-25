@@ -6,7 +6,8 @@ from pathlib import Path
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "https://word-flash-dun.vercel.app"
 ]
 
 app.add_middleware(
