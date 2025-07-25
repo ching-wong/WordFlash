@@ -28,3 +28,7 @@ def get_words(length: int):
     words = quiz_data.get(str(length))
     if words:
         return {"length": length, "words": words}
+
+@app.get("/ping")
+def ping():
+    return {"ping": "pong"}
