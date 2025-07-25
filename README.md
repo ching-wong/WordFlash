@@ -115,7 +115,7 @@ Start at Level 1. To unlock the next level, you must score at least 90% of the m
 
 ## Tech stack
 
-| Frontend | Backend (Coming Soon) |
+| Frontend | Backend |
 |----------|------------------------|
 | React (Vite) | FastAPI |
 | JavaScript | Python |
@@ -125,17 +125,7 @@ Start at Level 1. To unlock the next level, you must score at least 90% of the m
 
 - [x] React frontend MVP
 - [x] Store progress locally (Level unlock system)
-- [ ] Add FastAPI backend with word data
+- [x] Add FastAPI backend with word data
 - [ ] Add authentication
 - [ ] Store progress in database
 - [ ] Expand word list
-
-## Getting Started
-
-This project uses [Vite](https://vitejs.dev) with React.
-
-To run locally:
-
-```bash
-npm install
-npm run dev

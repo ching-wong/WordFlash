@@ -107,7 +107,7 @@ export default function useGameLogic(lv, words, pauseDurationBeforeWord, pauseDu
 
   // when wordIndex changes, check whether the game is done
   useEffect(() => {
-    if (wordIndex === words.length) {
+    if (words.length > 0 && wordIndex === words.length) {
       // save score to local storage
       const progress = getProgress();
 
@@ -121,7 +121,7 @@ export default function useGameLogic(lv, words, pauseDurationBeforeWord, pauseDu
 
       navigate('/result', { state: { lv, score } });
     }
-  }, [wordIndex]);
+  }, [wordIndex, words.length]);
 
   return {
     countdown,

@@ -7,10 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# frontend
+node_modules/
 dist
 dist-ssr
 *.local
+
+# backend
+backend/venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
 
 # Editor directories and files
 .vscode/*
@@ -23,4 +31,5 @@ dist-ssr
 *.sln
 *.sw?
 
-.DS_Store
+# System
+Thumbs.db

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import WordDisplay from '../components/WordDisplay';
@@ -17,8 +17,20 @@ export default function Game() {
   const location = useLocation();
   const lv = location.state?.lv;
 
-  const words = useMemo(() => {
-    return selectRandomWords(lv);
+  const [words, setWords] = useState([]);
+
+  useEffect(() => {
+    console.log("Level (lv):", lv);
+
+    async function selectWords() {
+      const selected = await selectRandomWords(lv);
+      console.log("Selected words:", selected);
+      setWords(selected);
+    }
+    
+    if (lv !== undefined && lv !== null) {
+      selectWords();
+    }
   }, [lv]);
 
   const {

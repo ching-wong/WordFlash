@@ -1,5 +1,5 @@
-import wordsData from '../data/all_words.json';
 import { allWordLengths, maxLength, minLength } from '../constants/gameLevels'
+import api from '../api.js';
 
 function fisherYatesShuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -8,7 +8,18 @@ function fisherYatesShuffle(array) {
   }
 }
 
-export function selectRandomWords(lv) {
+const fetchWordsByLength = async (length) => {
+  try {
+    const response = await api.get(`words/${length}`);
+    const data = response.data;
+    return data.words || [];
+  } catch (error) {
+    console.error("Error fetching words", error)
+    return [];
+  }
+}
+
+export async function selectRandomWords(lv) {
   const wordLengths = allWordLengths[lv];
   const words = [];
 
@@ -17,7 +28,7 @@ export function selectRandomWords(lv) {
     const count = wordLengths[i];
     
     if (count > 0) {
-      const availableWords = wordsData[len];
+      const availableWords = await fetchWordsByLength(len);
       const copy = [...availableWords];
       fisherYatesShuffle(copy);
       const selected = copy.slice(0, count);
