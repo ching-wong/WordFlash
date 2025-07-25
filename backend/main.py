@@ -29,6 +29,6 @@ def get_words(length: int):
     if words:
         return {"length": length, "words": words}
 
-@app.get("/ping")
+@app.api_route("/ping", methods=["GET", "HEAD"])
 def ping():
     return {"ping": "pong"}
